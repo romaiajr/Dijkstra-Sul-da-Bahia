@@ -21,6 +21,7 @@ import model.Vertice;
 import org.junit.*;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import modelTest.GrafoFactory;
 
 
 /**
@@ -39,18 +40,12 @@ public class GrafoTeste {
 
     @Before
     public void setUp() throws IOException {
-        inicial = new Grafo();
+        inicial = new GrafoFactory();
         resultado = new Grafo();
     }
     @Test
     public void dijkstraTest(){
         
-        inicial.addAresta(30,"origem","caminhoMenor");
-        inicial.addAresta(50,"origem","caminhoMaior");
-        inicial.addAresta(10,"caminhoMenor","destino");
-        /*inicial.addAresta(7,"caminhoMenor","caminhoIntermediario");
-        inicial.addAresta(2,"caminhoIntermediario","destino");*/
-        inicial.addAresta(20,"caminhoMaior","destino");
         verticeAux1 = inicial.acharVertice("origem");
         verticeAux2 = inicial.acharVertice("destino");
         resultado.setVertices(inicial.encontrarMenorCaminhoDijkstra(verticeAux1, verticeAux2));
@@ -61,7 +56,5 @@ public class GrafoTeste {
         assertFalse(50==resultado.getArestas().get(0).getPeso());//Testa se foi escolhido caminho errado
         assertTrue(10==resultado.getArestas().get(1).getPeso());
         assertFalse(20==resultado.getArestas().get(1).getPeso());
-        
-        
     }
 }
